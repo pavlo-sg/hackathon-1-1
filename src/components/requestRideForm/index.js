@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import RideModal from '../rideModal';
+import './index.css';
 
 const RequestRideForm = () => {
   const [pickup, setPickup] = useState('');
@@ -17,7 +18,7 @@ const RequestRideForm = () => {
     return (
     <div className="request-ride-form">
       <h2>Request a Ride</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='form-container'>
         <div className="form-group">
           <label htmlFor="pickup">Pickup Location:</label>
           <input
@@ -41,7 +42,6 @@ const RequestRideForm = () => {
         <button type="submit">Request Ride</button>
       </form>
         <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} />
-
     </div>
   );
 };
