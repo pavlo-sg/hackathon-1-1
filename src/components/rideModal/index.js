@@ -32,7 +32,8 @@ const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }
   const openCompanyRankingModal = () => {
     setCompanyRankingModalIsOpen(true);
   };
-
+  console.log(typeof carbonFootprint);
+  //round the carbon footprint to 2 decimal places
   const closeCompanyRankingModal = () => {
     setCompanyRankingModalIsOpen(false);
   };
@@ -45,7 +46,7 @@ const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }
           <div>
             <p>Distance: {distance}</p>
             <p>Duration: {duration}</p>
-            <p>Carbon Footprint: {carbonFootprint}</p>
+            <p>Carbon Footprint: {Math.round(carbonFootprint * 100) / 100}</p>
           </div>
         ) : (
           <p>Loading...</p>

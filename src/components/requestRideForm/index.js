@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import RideModal from "../rideModal";
 const RequestRideForm = () => {
-  const [pickup, setPickup] = useState("Boston,MA");
-  const [dropoff, setDropoff] = useState("Chicago,IL");
+  const [pickup, setPickup] = useState("");
+  const [dropoff, setDropoff] = useState("");
   const [isReadyToGetRide, setIsReadyToGetRide] = useState(false);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
