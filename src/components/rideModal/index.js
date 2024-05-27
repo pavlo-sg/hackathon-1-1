@@ -25,8 +25,8 @@ const modalStyles = {
     overflow: "auto",
   },
 };
-const RideModal = ({ isOpen, onRequestClose, pickup, dropoff }) => {
-  const { distance, duration } = useDistanceMatrix(pickup, dropoff);
+const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }) => {
+  const { distance, duration } = useDistanceMatrix(pickup, dropoff, isReadyToGetRide);
   const [companyRankingModalIsOpen, setCompanyRankingModalIsOpen] = useState(false);
   console.log(distance);
   const openCompanyRankingModal = () => {

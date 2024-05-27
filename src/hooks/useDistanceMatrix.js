@@ -1,12 +1,12 @@
 // const { distance, duration } = useDistanceMatrix(pickup, dropoff);
 import { useState, useEffect } from "react";
 
-export default function useDistanceMatrix(pickup, dropoff) {
+export default function useDistanceMatrix(pickup, dropoff, isReadyToGetRide) {
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
   console.log(pickup);
   useEffect(() => {
-    if (!pickup || !dropoff) {
+    if (!pickup || !dropoff || !isReadyToGetRide) {
       return;
     }
     const fetchDistanceMatrix = async () => {

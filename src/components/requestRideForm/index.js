@@ -3,10 +3,12 @@ import RideModal from "../rideModal";
 const RequestRideForm = () => {
   const [pickup, setPickup] = useState("Boston,MA");
   const [dropoff, setDropoff] = useState("Chicago,IL");
+  const [isReadyToGetRide, setIsReadyToGetRide] = useState(false);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleSubmit = (event) => {
+    setIsReadyToGetRide(true);
     event.preventDefault();
     setModalIsOpen(true);
   };
@@ -40,7 +42,7 @@ const RequestRideForm = () => {
         </div>
         <button type="submit">Request Ride</button>
       </form>
-      <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} pickup={pickup} dropoff={dropoff} />
+      <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} pickup={pickup} dropoff={dropoff} isReadyToGetRide />
     </div>
   );
 };
