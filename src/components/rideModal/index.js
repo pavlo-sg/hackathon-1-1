@@ -1,8 +1,8 @@
 // src/components/RideModal.js
 import React from 'react';
 import Modal from 'react-modal';
-import { Link } from 'react-router-dom';
-
+import { useState } from 'react';
+import CompanyRankingModal from '../companyRankingModal'
 
 const modalStyles = {
   overlay: {
@@ -26,6 +26,15 @@ const modalStyles = {
   }
 };
 const RideModal = ({ isOpen, onRequestClose }) => {
+      const [companyRankingModalIsOpen, setCompanyRankingModalIsOpen] = useState(false);
+
+  const openCompanyRankingModal = () => {
+    setCompanyRankingModalIsOpen(true);
+  };
+
+  const closeCompanyRankingModal = () => {
+    setCompanyRankingModalIsOpen(false);
+  };
   return (
     <Modal
       isOpen={isOpen}
@@ -36,7 +45,8 @@ const RideModal = ({ isOpen, onRequestClose }) => {
       <h2>Request Ride</h2>
       <p>Save up to xx co2 carbon footprint by using different transportation...</p>
       <button onClick={onRequestClose}>Close Modal</button>
-        
+      <button onClick={openCompanyRankingModal}>Company Ranking</button>
+      <CompanyRankingModal isOpen={companyRankingModalIsOpen} onRequestClose={closeCompanyRankingModal} />  
     </Modal>
   );
 };
