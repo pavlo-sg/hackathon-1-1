@@ -9,7 +9,7 @@ const RequestRideForm = () => {
 
   useEffect(() => {
     const fetchDistanceMatrix = async () => {
-      const url = `https://hackathon-1-1.netlify.app/.netlify/functions/hack`;
+      const url = `https://hackathon-1-1.netlify.app/.netlify/functions/hack?origins=Boston,MA&destinations=Chicago,IL`;
 
       try {
         const response = await fetch(url);
