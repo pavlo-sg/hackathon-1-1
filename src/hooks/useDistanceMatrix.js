@@ -14,12 +14,9 @@ export default function useDistanceMatrix(pickup, dropoff, isReadyToGetRide) {
 
       try {
         const response = await fetch(url);
-        const { data } = await response.json();
-        if (data?.rows) {
-          const element = data.rows[0].elements[0];
-          setDistance(element.distance.text);
-          setDuration(element.duration.text);
-        }
+        const { distance, duration } = await response.json();
+        setDistance(distance);
+        setDuration(duration);
       } catch (error) {
         console.error("Error fetching the Distance Matrix:", error);
       }

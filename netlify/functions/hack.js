@@ -24,7 +24,14 @@ export default async (request, context) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return new Response(JSON.stringify({ data }), {
+    let distance = null;
+    let duration = null;
+    if (data?.rows) {
+      const element = data.rows[0].elements[0];
+      distance = element.distance.text;
+      duration = element.duration.text;
+    }
+    return new Response(JSON.stringify({ distance, duration }), {
       status: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
