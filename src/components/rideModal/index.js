@@ -6,6 +6,7 @@ import CompanyRankingModal from "../companyRankingModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Image1, Image2 } from "./image";
+import useDistanceMatrix from "../../hooks/useDistanceMatrix";
 
 const modalStyles = {
   overlay: {
