@@ -31,6 +31,7 @@ export default async (request, context) => {
       distance = element.distance.text;
       duration = element.duration.text;
     }
+    console.log(distance);
     // calculate the carbon footprint for the distance if you go by car
     const carbonFootprint = 0.2 * parseInt(distance.split(" ")[0]);
 
