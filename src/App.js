@@ -1,14 +1,18 @@
-import './App.css';
-import { IphoneFrame } from './components';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import RequestRideForm from './components/requestRideForm';
+import IphoneFrame from './components/iphoneFrame';
 
-
-function App() {
-   
+const App = () => {
   return (
-    <div className="App">
-      
-        <IphoneFrame></IphoneFrame>
-    </div>
+    <Router>
+      <IphoneFrame>
+      <Routes>
+          <Route path="/request-ride" component={RequestRideForm} />
+      </Routes>
+  
+      </IphoneFrame>
+    </Router>
   );
 }
 

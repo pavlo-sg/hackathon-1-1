@@ -4,6 +4,8 @@ import Modal from "react-modal";
 import { useState } from "react";
 import CompanyRankingModal from "../companyRankingModal";
 import useDistanceMatrix from "../../hooks/useDistanceMatrix";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const modalStyles = {
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
@@ -20,41 +22,114 @@ const modalStyles = {
     padding: "20px",
     width: "80%", // Adjust the width as needed
     height: "80%", // Adjust the height as needed
-    maxWidth: "300px", // Maximum width
-    maxHeight: "300px", // Maximum height
+    maxWidth: "320px", // Maximum width
+    // maxHeight: '300px', // Maximum height
     overflow: "auto",
+    backgroundColor: "#000",
+    color: "#ffff",
+  },
+  button: {
+    backgroundColor: "white",
+    color: "#000",
+    width: "100%",
+    padding: "10px 20px",
+    borderRadius: "5px", // Optionally add border radius for a nicer look
+    border: "none", // Optionally remove border
+    cursor: "pointer",
+  },
+  paragraph: {
+    color: "white",
+    // font-family: Poppins;
+    marginTop: "8px",
+    fontSize: "40px",
+    fontWeight: 300,
+  },
+  heading: {
+    color: "#05CAAD",
+    // font-family: Poppins;
+    fontSize: "18px",
+    fontWeight: 400,
+    marginTop: "32px",
+  },
+  carbonValue: {
+    color: "#05CAAD",
+    // font-family: Poppins;
+    fontSize: "150px",
+    fontWeight: 300,
+    letterSpacing: "-6px",
+  },
+  kg: {
+    color: "#05CAAD",
+    fontSize: "42px",
+    fontWeight: 400,
+  },
+  other: {
+    color: "#ffffff4d",
+    // font-family: Poppins;
+    fontSize: "14px",
+    fontWeight: 400,
+    marginBottom: "8px",
+  },
+  card: {
+    padding: "10px 5px 10px 5px",
+    borderRadius: "16px",
+    backgroundColor: "#ffffff1a",
+    marginBottom: "8px",
   },
 };
 const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }) => {
-  const { distance, duration, carbonFootprint } = useDistanceMatrix(pickup, dropoff, isReadyToGetRide);
   const [companyRankingModalIsOpen, setCompanyRankingModalIsOpen] = useState(false);
-  console.log(distance, duration, carbonFootprint);
+  const { differenceCarGasolineBike, differenceCarGasolineEVScooter, carbonFootprint } = useDistanceMatrix(
+    pickup,
+    dropoff,
+    isReadyToGetRide
+  );
+
   const openCompanyRankingModal = () => {
     setCompanyRankingModalIsOpen(true);
   };
-  console.log(typeof carbonFootprint);
-  //round the carbon footprint to 2 decimal places
+
   const closeCompanyRankingModal = () => {
     setCompanyRankingModalIsOpen(false);
   };
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel="Request Ride Modal" style={modalStyles}>
-      <h2>Request Ride</h2>
-      <div>
-        <h1>Distance Matrix</h1>
-        {distance && duration ? (
-          <div>
-            <p>Distance: {distance}</p>
-            <p>Duration: {duration}</p>
-            <p>Carbon Footprint: {Math.round(carbonFootprint * 100) / 100}</p>
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
+      <h2 style={modalStyles.heading}>Carbon Footprint</h2>
+      <p style={modalStyles.paragraph}>With this trip you will save</p>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          paddingBottom: "10px",
+          borderBottom: "1px solid #ffffff33",
+          marginBottom: "20px",
+        }}
+      >
+        {/* this will be dinamic */}
+        <p style={modalStyles.carbonValue}>{Math.round(carbonFootprint * 10) / 10}</p>
+        <p style={modalStyles.kg}>kg</p>
       </div>
-      <p>Save up to xx co2 carbon footprint by using different transportation...</p>
-      <button onClick={onRequestClose}>Close Modal</button>
-      <button onClick={openCompanyRankingModal}>Company Ranking</button>
+      <div>
+        <p style={modalStyles.other}>Other options</p>
+      </div>
+      <div style={modalStyles.card}>
+        <FontAwesomeIcon icon="fa-light fa-bicycle" />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <p>Bike</p>
+          <p>You will save {differenceCarGasolineBike || "5"}kg</p>
+        </div>
+      </div>
+      <div style={modalStyles.card}>
+        <FontAwesomeIcon icon="fa-light fa-bicycle" style={{ color: "#05CAAD" }} />
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <p>Scooter</p>
+          <p>You will save {differenceCarGasolineEVScooter || "2"}kg</p>
+        </div>
+      </div>
+      {/* <button onClick={onRequestClose}>Close Modal</button> */}
+      <button onClick={openCompanyRankingModal} style={{ marginTop: "8px" }}>
+        Continue
+      </button>
       <CompanyRankingModal isOpen={companyRankingModalIsOpen} onRequestClose={closeCompanyRankingModal} />
     </Modal>
   );
