@@ -1,31 +1,10 @@
 import React, { useState, useEffect } from "react";
 import RideModal from "../rideModal";
 const RequestRideForm = () => {
-  const [pickup, setPickup] = useState("");
-  const [dropoff, setDropoff] = useState("");
-  const [distance, setDistance] = useState(null);
-  const [duration, setDuration] = useState(null);
+  const [pickup, setPickup] = useState("Boston,MA");
+  const [dropoff, setDropoff] = useState("Chicago,IL");
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchDistanceMatrix = async () => {
-      const url = `https://hackathon-1-1.netlify.app/.netlify/functions/hack?origins=Boston,MA&destinations=Chicago,IL`;
-
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.rows.length > 0 && data.rows[0].elements.length > 0) {
-          const element = data.rows[0].elements[0];
-          setDistance(element.distance.text);
-          setDuration(element.duration.text);
-        }
-      } catch (error) {
-        console.error("Error fetching the Distance Matrix:", error);
-      }
-    };
-
-    fetchDistanceMatrix();
-  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -61,34 +40,7 @@ const RequestRideForm = () => {
         </div>
         <button type="submit">Request Ride</button>
       </form>
-      <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} />
-      <div>
-        <h1>Distance Matrix</h1>
-        {distance && duration ? (
-          <div>
-            <p>Distance: {distance}</p>
-            <p>Duration: {duration}</p>
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-
-      <iframe
-        referrerPolicy="no-referrer-when-downgrade"
-        title="map"
-        width="450"
-        height="250"
-        frameBorder="0"
-        allowFullScreen
-        style={{ border: 0 }}
-        src={`https://www.google.com/maps/embed/v1/directions
-              ?key=AIzaSyAGtrYV4g9feB2dZUQrVXKGkWQFnXgB3IU
-              &origin=Oslo+Norway
-              &destination=Telemark+Norway
-              &avoid=tolls|highways
-        `}
-      ></iframe>
+      <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} pickup={pickup} dropoff={dropoff} />
     </div>
   );
 };
