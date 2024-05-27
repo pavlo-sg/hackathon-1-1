@@ -1,44 +1,45 @@
 import React, { useState } from 'react';
 
-const RideRequestForm = () => {
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
+const RequestRideForm = () => {
+  const [pickup, setPickup] = useState('');
+  const [dropoff, setDropoff] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`Ride requested from ${origin} to ${destination}`);
-    // Here you can add the logic to send the ride request to your backend or API
+    alert(`Pickup: ${pickup}, Dropoff: ${dropoff}`);
   };
 
-  return (
-    <div style={styles.container}>
-      <h2 style={styles.heading}>Request a Ride</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label style={styles.label}>
-          Origin:
+    return (
+    <div className="request-ride-form">
+      <h2>Request a Ride</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="pickup">Pickup Location:</label>
           <input
             type="text"
-            value={origin}
-            onChange={(e) => setOrigin(e.target.value)}
-            style={styles.input}
-            required
+            id="pickup"
+            value={pickup}
+            onChange={(e) => setPickup(e.target.value)}
+            placeholder="Enter your pickup location"
           />
-        </label>
-        <label style={styles.label}>
-          Destination:
+        </div>
+        <div className="form-group">
+          <label htmlFor="dropoff">Dropoff Location:</label>
           <input
             type="text"
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            style={styles.input}
-            required
+            id="dropoff"
+            value={dropoff}
+            onChange={(e) => setDropoff(e.target.value)}
+            placeholder="Enter your dropoff location"
           />
-        </label>
-        <button type="submit" style={styles.button}>Request Ride</button>
+        </div>
+        <button type="submit">Request Ride</button>
       </form>
     </div>
   );
 };
+
+export default RequestRideForm;
 
 const styles = {
   container: {
@@ -82,5 +83,3 @@ const styles = {
     cursor: 'pointer',
   },
 };
-
-export default RideRequestForm;

@@ -1,0 +1,61 @@
+/* src/components/RequestRideForm.css */
+.request-ride-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.request-ride-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+    color: #bbb;
+}
+
+button {
+    padding: 12px 24px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005bb5;
+}
