@@ -27,7 +27,7 @@ const IphoneFrame = ({ children }) => {
       <div className="screen">
         {openApp ? (
           <div className="app-content">
-            <button className="back-button" onClick={handleBackClick}>Back</button>
+            <button className="back-button" onClick={handleBackClick}><FontAwesomeIcon icon="fa-solid fa-arrow-left" /></button>
             {openApp}
           </div>
         ) : (

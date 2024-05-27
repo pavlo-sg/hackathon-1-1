@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import RideModal from "../rideModal";
+import "./index.css";
+
 const RequestRideForm = () => {
   const [pickup, setPickup] = useState("");
   const [dropoff, setDropoff] = useState("");
@@ -19,7 +21,7 @@ const RequestRideForm = () => {
   return (
     <div className="request-ride-form">
       <h2>Request a Ride</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-container">
         <div className="form-group">
           <label htmlFor="pickup">Pickup Location:</label>
           <input
