@@ -1,10 +1,31 @@
-import React, { useState } from 'react';
-import RideModal from '../rideModal';
-
+import React, { useState, useEffect } from "react";
+import RideModal from "../rideModal";
 const RequestRideForm = () => {
-  const [pickup, setPickup] = useState('');
-  const [dropoff, setDropoff] = useState('');
+  const [pickup, setPickup] = useState("");
+  const [dropoff, setDropoff] = useState("");
+  const [distance, setDistance] = useState(null);
+  const [duration, setDuration] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchDistanceMatrix = async () => {
+      const url = `https://hackathon-1-1.netlify.app/.netlify/functions/hack`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.rows.length > 0 && data.rows[0].elements.length > 0) {
+          const element = data.rows[0].elements[0];
+          setDistance(element.distance.text);
+          setDuration(element.duration.text);
+        }
+      } catch (error) {
+        console.error("Error fetching the Distance Matrix:", error);
+      }
+    };
+
+    fetchDistanceMatrix();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -14,7 +35,7 @@ const RequestRideForm = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   };
-    return (
+  return (
     <div className="request-ride-form">
       <h2>Request a Ride</h2>
       <form onSubmit={handleSubmit}>
@@ -40,8 +61,18 @@ const RequestRideForm = () => {
         </div>
         <button type="submit">Request Ride</button>
       </form>
-        <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} />
-
+      <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} />
+      <div>
+        <h1>Distance Matrix</h1>
+        {distance && duration ? (
+          <div>
+            <p>Distance: {distance}</p>
+            <p>Duration: {duration}</p>
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
+      </div>
     </div>
   );
 };
