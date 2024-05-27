@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
+import RideModal from '../rideModal';
 
 const RequestRideForm = () => {
   const [pickup, setPickup] = useState('');
   const [dropoff, setDropoff] = useState('');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`Pickup: ${pickup}, Dropoff: ${dropoff}`);
+    setModalIsOpen(true);
   };
 
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
     return (
     <div className="request-ride-form">
       <h2>Request a Ride</h2>
@@ -35,51 +40,53 @@ const RequestRideForm = () => {
         </div>
         <button type="submit">Request Ride</button>
       </form>
+        <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} />
+
     </div>
   );
 };
 
 export default RequestRideForm;
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#f0f0f0',
-  },
-  heading: {
-    marginBottom: '20px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: '10px',
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '8px',
-    backgroundColor: '#fff',
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-  },
-  input: {
-    padding: '10px',
-    marginTop: '5px',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-    width: '200px',
-  },
-  button: {
-    padding: '10px 20px',
-    borderRadius: '4px',
-    border: 'none',
-    backgroundColor: '#007BFF',
-    color: '#fff',
-    cursor: 'pointer',
-  },
-};
+// const styles = {
+//   container: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     backgroundColor: '#f0f0f0',
+//   },
+//   heading: {
+//     marginBottom: '20px',
+//   },
+//   form: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'center',
+//     gap: '10px',
+//     padding: '20px',
+//     border: '1px solid #ccc',
+//     borderRadius: '8px',
+//     backgroundColor: '#fff',
+//   },
+//   label: {
+//     display: 'flex',
+//     flexDirection: 'column',
+//     alignItems: 'flex-start',
+//   },
+//   input: {
+//     padding: '10px',
+//     marginTop: '5px',
+//     borderRadius: '4px',
+//     border: '1px solid #ccc',
+//     width: '200px',
+//   },
+//   button: {
+//     padding: '10px 20px',
+//     borderRadius: '4px',
+//     border: 'none',
+//     backgroundColor: '#007BFF',
+//     color: '#fff',
+//     cursor: 'pointer',
+//   },
+// };
