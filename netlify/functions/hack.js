@@ -1,5 +1,3 @@
-const API_ENDPOINT = "https://cat-fact.herokuapp.com/facts";
-
 export default async (request, context) => {
   const apiKey = "AIzaSyAGtrYV4g9feB2dZUQrVXKGkWQFnXgB3IU";
   const origins = "Washington,DC";
@@ -8,12 +6,36 @@ export default async (request, context) => {
     origins
   )}&destinations=${encodeURIComponent(destinations)}&units=imperial&key=${apiKey}`;
 
+  // Handle OPTIONS method for preflight requests
+  if (request.method === "OPTIONS") {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET",
+        "Access-Control-Allow-Headers": "Content-Type",
+      },
+    });
+  }
+
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return Response.json({ data });
+    return new Response(JSON.stringify({ data }), {
+      status: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
     console.log(error);
-    return Response.json({ error: "Failed fetching data" }, { status: 500 });
+    return new Response(JSON.stringify({ error: "Failed fetching data" }), {
+      status: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+      },
+    });
   }
 };
