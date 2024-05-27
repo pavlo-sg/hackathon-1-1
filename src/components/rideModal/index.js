@@ -26,9 +26,9 @@ const modalStyles = {
   },
 };
 const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }) => {
-  const { distance, duration } = useDistanceMatrix(pickup, dropoff, isReadyToGetRide);
+  const { distance, duration, carbonFootprint } = useDistanceMatrix(pickup, dropoff, isReadyToGetRide);
   const [companyRankingModalIsOpen, setCompanyRankingModalIsOpen] = useState(false);
-  console.log(distance);
+  console.log(carbonFootprint);
   const openCompanyRankingModal = () => {
     setCompanyRankingModalIsOpen(true);
   };
@@ -45,6 +45,7 @@ const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }
           <div>
             <p>Distance: {distance}</p>
             <p>Duration: {duration}</p>
+            <p>Carbon Footprint: {carbonFootprint}</p>
           </div>
         ) : (
           <p>Loading...</p>
