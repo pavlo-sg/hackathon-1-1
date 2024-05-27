@@ -73,6 +73,22 @@ const RequestRideForm = () => {
           <p>Loading...</p>
         )}
       </div>
+
+      <iframe
+        referrerPolicy="no-referrer-when-downgrade"
+        title="map"
+        width="450"
+        height="250"
+        frameBorder="0"
+        allowFullScreen
+        style={{ border: 0 }}
+        src={`https://www.google.com/maps/embed/v1/directions
+              ?key=AIzaSyAGtrYV4g9feB2dZUQrVXKGkWQFnXgB3IU
+              &origin=Oslo+Norway
+              &destination=Telemark+Norway
+              &avoid=tolls|highways
+        `}
+      ></iframe>
     </div>
   );
 };
