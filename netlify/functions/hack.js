@@ -33,21 +33,9 @@ export default async (request, context) => {
       distanceValue = element.distance.value;
       duration = element.duration.text;
     }
-    function msToTime(duration) {
-      var milliseconds = Math.floor((duration % 1000) / 100),
-        seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
 
-      hours = hours < 10 ? "0" + hours : hours;
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-    }
-    console.log(msToTime(distanceValue));
     // calculate the carbon footprint for the distance if you go by car
-    const carbonFootprint = msToTime(distanceValue);
+    const carbonFootprint = distanceValue ? (distanceValue / 1000) * 0.2 : null;
 
     return new Response(JSON.stringify({ distance, duration, carbonFootprint }), {
       status: 200,
