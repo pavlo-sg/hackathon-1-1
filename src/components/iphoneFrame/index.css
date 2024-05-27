@@ -1,0 +1,60 @@
+/* src/components/IphoneFrame.css */
+.iphone-frame {
+    width: 375px;
+    height: 812px;
+    border: 16px solid black;
+    border-radius: 36px;
+    position: relative;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+.notch {
+    width: 210px;
+    height: 30px;
+    background: black;
+    border-radius: 0 0 15px 15px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.camera,
+.speaker {
+    background: #333;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin-top: 10px;
+}
+
+.speaker {
+    width: 60px;
+    height: 5px;
+    border-radius: 5px;
+}
+
+.screen {
+    width: 100%;
+    height: calc(100% - 100px);
+    position: absolute;
+    top: 30px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.home-button {
+    width: 60px;
+    height: 60px;
+    background: black;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
