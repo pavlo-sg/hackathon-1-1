@@ -31,7 +31,10 @@ export default async (request, context) => {
       distance = element.distance.text;
       duration = element.duration.text;
     }
-    return new Response(JSON.stringify({ distance, duration }), {
+    // calculate the carbon footprint for the distance if you go by car
+    const carbonFootprint = 0.2 * parseInt(distance.split(" ")[0]);
+
+    return new Response(JSON.stringify({ distance, duration, carbonFootprint }), {
       status: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",

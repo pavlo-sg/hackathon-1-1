@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 export default function useDistanceMatrix(pickup, dropoff, isReadyToGetRide) {
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
+  const [carbonFootprint, setCarbonFootprint] = useState(null);
   console.log(pickup);
   useEffect(() => {
     if (!pickup || !dropoff || !isReadyToGetRide) {
@@ -14,9 +15,10 @@ export default function useDistanceMatrix(pickup, dropoff, isReadyToGetRide) {
 
       try {
         const response = await fetch(url);
-        const { distance, duration } = await response.json();
+        const { distance, duration, carbonFootprint } = await response.json();
         setDistance(distance);
         setDuration(duration);
+        setCarbonFootprint(carbonFootprint);
       } catch (error) {
         console.error("Error fetching the Distance Matrix:", error);
       }
@@ -25,5 +27,5 @@ export default function useDistanceMatrix(pickup, dropoff, isReadyToGetRide) {
     fetchDistanceMatrix();
   }, [pickup, dropoff, isReadyToGetRide]);
 
-  return { distance, duration };
+  return { distance, duration, carbonFootprint };
 }
