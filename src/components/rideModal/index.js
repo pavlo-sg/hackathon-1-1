@@ -3,8 +3,9 @@ import React from "react";
 import Modal from "react-modal";
 import { useState } from "react";
 import CompanyRankingModal from "../companyRankingModal";
-import useDistanceMatrix from "../../hooks/useDistanceMatrix";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { Image1, Image2 } from "./image";
 
 const modalStyles = {
   overlay: {
@@ -23,10 +24,10 @@ const modalStyles = {
     width: "80%", // Adjust the width as needed
     height: "80%", // Adjust the height as needed
     maxWidth: "320px", // Maximum width
-    // maxHeight: '300px', // Maximum height
-    overflow: "auto",
+    maxHeight: "1000px", // Maximum height
     backgroundColor: "#000",
     color: "#ffff",
+    overflow: "hidden",
   },
   button: {
     backgroundColor: "white",
@@ -49,7 +50,7 @@ const modalStyles = {
     // font-family: Poppins;
     fontSize: "18px",
     fontWeight: 400,
-    marginTop: "32px",
+    marginTop: "20px",
   },
   carbonValue: {
     color: "#05CAAD",
@@ -75,6 +76,9 @@ const modalStyles = {
     borderRadius: "16px",
     backgroundColor: "#ffffff1a",
     marginBottom: "8px",
+    display: "flex",
+    gap: "10px",
+    alignItems: "center",
   },
 };
 const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }) => {
@@ -94,6 +98,9 @@ const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }
   };
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} contentLabel="Request Ride Modal" style={modalStyles}>
+      <div onClick={onRequestClose}>
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </div>
       <h2 style={modalStyles.heading}>Carbon Footprint</h2>
       <p style={modalStyles.paragraph}>With this trip you will save</p>
       <div
@@ -113,20 +120,25 @@ const RideModal = ({ isOpen, onRequestClose, pickup, dropoff, isReadyToGetRide }
         <p style={modalStyles.other}>Other options</p>
       </div>
       <div style={modalStyles.card}>
-        <FontAwesomeIcon icon="fa-light fa-bicycle" />
+        <Image1 />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <p>Bike</p>
-          <p>You will save {differenceCarGasolineBike || "5"}kg</p>
+          <p style={{ color: "white", fontWeight: 400, fontSize: "14px" }}>Bike</p>
+          <p style={{ color: "#ffffff80", fontWeight: 400, fontSize: "14px" }}>
+            You will save {differenceCarGasolineBike || "5"}kg
+          </p>
         </div>
       </div>
       <div style={modalStyles.card}>
-        <FontAwesomeIcon icon="fa-light fa-bicycle" style={{ color: "#05CAAD" }} />
+        <div style={{ backgroundColor: "#ffffff1a", padding: "10px", borderRadius: "16px" }}>
+          <Image2 />
+        </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <p>Scooter</p>
-          <p>You will save {differenceCarGasolineEVScooter || "2"}kg</p>
+          <p style={{ color: "white", fontWeight: 400, fontSize: "14px" }}>Bike</p>
+          <p style={{ color: "#ffffff80", fontWeight: 400, fontSize: "14px" }}>
+            You will save {differenceCarGasolineEVScooter || "2"}kg
+          </p>
         </div>
       </div>
-      {/* <button onClick={onRequestClose}>Close Modal</button> */}
       <button onClick={openCompanyRankingModal} style={{ marginTop: "8px" }}>
         Continue
       </button>
