@@ -42,7 +42,13 @@ const RequestRideForm = () => {
         </div>
         <button type="submit">Request Ride</button>
       </form>
-      <RideModal isOpen={modalIsOpen} onRequestClose={closeModal} pickup={pickup} dropoff={dropoff} isReadyToGetRide />
+      <RideModal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        pickup={pickup}
+        dropoff={dropoff}
+        isReadyToGetRide={isReadyToGetRide}
+      />
     </div>
   );
 };

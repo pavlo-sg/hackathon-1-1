@@ -26,7 +26,7 @@ export default function useDistanceMatrix(pickup, dropoff, isReadyToGetRide) {
     };
 
     fetchDistanceMatrix();
-  }, [pickup, dropoff]);
+  }, [pickup, dropoff, isReadyToGetRide]);
 
   return { distance, duration };
 }
